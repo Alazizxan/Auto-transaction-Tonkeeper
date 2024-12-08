@@ -86,14 +86,14 @@ try:
 
                 max_span = driver.find_element(By.XPATH, "//span[text()='MAX']")
                 driver.execute_script("arguments[0].click();", max_span)
-
+                time.sleep(2)
 
                 # `Continue` tugmasini topish va bosish
                 continue_button = driver.find_element(By.XPATH, "//button[text()='Continue']")
 
                 # Tugmani bosish
                 continue_button.click()
-                time.sl
+                
 
                 
             else:
