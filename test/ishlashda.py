@@ -72,7 +72,9 @@ try:
                 driver.execute_script("arguments[0].click();", send_button)
 
 
-                textarea = driver.find_element(By.CSS_SELECTOR, 'textarea.sc-dkArIB.fUXcBE')
+                textarea = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.TAG_NAME, "textarea"))
+                )
                 textarea.send_keys('UQBjnfy1nGfJFZchNUj7hHEWy1hi-nEvm0CZvP2oNRv5dOF8')
 
                 # 1 soniya kutish (kiritilgan matnni tekshirish uchun)
@@ -86,15 +88,31 @@ try:
 
                 max_span = driver.find_element(By.XPATH, "//span[text()='MAX']")
                 driver.execute_script("arguments[0].click();", max_span)
-                time.sleep(2)
+                
 
                 # `Continue` tugmasini topish va bosish
                 continue_button = driver.find_element(By.XPATH, "//button[text()='Continue']")
 
                 # Tugmani bosish
                 continue_button.click()
-                
+                time.sleep(3)
 
+                confirm_button = driver.find_element(By.XPATH, "//button[text()='Confirm and Send']")
+                confirm_button.click()
+                time.sleep(3)                
+
+                password_input = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.ID, "unlock-password"))
+                )
+                password_input.send_keys("Lalaku007")
+
+                # 'Confirm' tugmasini matni orqali kutish va tanlash
+                confirm_button = WebDriverWait(driver, 10).until(
+                    EC.element_to_be_clickable((By.XPATH, "//button[text()='Confirm']"))
+                )
+
+                # 'Confirm' tugmasini bosish
+                confirm_button.click()
                 
             else:
                 print("Qiymat 0.0001 dan kichik.")
